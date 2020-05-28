@@ -99,41 +99,48 @@ public class Maytinhmini extends Activity implements View.OnClickListener {
 
             }
             case R.id.btnbang: {
-                int s1, s2, kq;
-                s1 = Integer.parseInt(strs1);
-                s2 = Integer.parseInt(strs2);
+                float s1, s2, kq;
+                s1 = Float.parseFloat(strs1);
+                s2 = Float.parseFloat(strs2);
 
-                switch (strdau){
-                    case "+":{
+                switch (strdau) {
+                    case "+": {
                         kq = s1 + s2;
                         edtHienthi.setText("");
                         edtHienthi.setText(String.valueOf(kq));
                         strs1 = String.valueOf(kq);
                         break;
                     }
-                    case "-":{
+                    case "-": {
                         kq = s1 - s2;
                         edtHienthi.setText("");
                         edtHienthi.setText(String.valueOf(kq));
                         strs1 = String.valueOf(kq);
                         break;
                     }
-                    case "x":{
-                        kq = s1*s2;
+                    case "x": {
+                        kq = s1 * s2;
                         edtHienthi.setText("");
                         edtHienthi.setText(String.valueOf(kq));
                         strs1 = String.valueOf(kq);
                         break;
                     }
-                    case "÷":{
-                        kq = s1/s2;
-                        edtHienthi.setText("");
-                        edtHienthi.setText(String.valueOf(kq));
-                        strs1 = String.valueOf(kq);
-                        break;
+                    case "÷": {
+                        if (s2 == 0) {
+                            strdau = strkq = strs1 = strs2 = "";
+                            edtHienthi.setText("");
+                            Toast.makeText(Maytinhmini.this, "Khong the chia cho 0", Toast.LENGTH_SHORT).show();
+                            break;
+                        } else {
+                            kq = s1 / s2;
+                            edtHienthi.setText("");
+                            edtHienthi.setText(String.valueOf(kq));
+                            strs1 = String.valueOf(kq);
+                            break;
+                        }
+
                     }
                 }
-
 
 
                 strdau = strs2 = strkq = "";
@@ -153,7 +160,27 @@ public class Maytinhmini extends Activity implements View.OnClickListener {
                 }
             }
             case R.id.btncham: {
-
+                if(strdau.equals("")){
+                    if (strs1.equals("")){
+                        strs1+="0.";
+                        edtHienthi.setText(strs1);
+                        break;
+                    }else {
+                        strs1+=".";
+                        edtHienthi.setText(strs1);
+                        break;
+                    }
+                }else {
+                    if (strs2.equals("")){
+                        strs2+="0.";
+                        edtHienthi.setText(strs1+strdau+strs2);
+                        break;
+                    }else {
+                        strs2+=".";
+                        edtHienthi.setText(strs1+strdau+strs2);
+                        break;
+                    }
+                }
             }
             case R.id.btn1: {
                 if (strdau.equals("")) {
